@@ -32,7 +32,7 @@ def not_found(e):
 @app.route('/time')
 @cross_origin()
 def get_current_time():
-     return{'time': time.time()}
+    return os.environ['HI']
 
 @app.route('/post_survey_data', methods = ['POST'])
 @cross_origin()
