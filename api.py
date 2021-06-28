@@ -25,13 +25,7 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return json.JSONEncoder.default(self,o)
 
-@app.route('/time')
-@cross_origin
-def get_current_time():
-    return{'time': time.time()}
-
 @app.route('/post_survey_data', methods = ['POST'])
-@cross_origin
 def post_survey_data():
     d = request.get_json(force="False")
     json.dumps(d, cls=JSONEncoder)
@@ -39,7 +33,6 @@ def post_survey_data():
     return 'hi'
 
 @app.route('/recommendations/<surveyid>', methods = ['GET'])
-@cross_origin
 def recommendations(surveyid):
     survey_results = retrieve_survey_results(surveyid)
     recommendations = retrieve_valid_cars(survey_results)
