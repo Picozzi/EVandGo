@@ -29,6 +29,11 @@ class JSONEncoder(json.JSONEncoder):
 def not_found(e):
     return app.send_static_file('index.html')
 
+@app.route('/time')
+@cross_origin
+def get_current_time():
+     return{'time': time.time()}
+
 @app.route('/post_survey_data', methods = ['POST'])
 @cross_origin()
 def post_survey_data():
