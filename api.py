@@ -1,4 +1,5 @@
 import time
+import os
 from flask import Flask
 from flask import request
 import json
@@ -7,13 +8,13 @@ from flask_cors import CORS, cross_origin
 from flask.helpers import send_from_directory
 import pymongo
 from bson import json_util
-from dotenv import dotenv_values
+#from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+#config = dotenv_values(".env")
 app = Flask(__name__, static_folder="evapplication/build", static_url_path="")
 CORS(app)
 
-mongo = pymongo.MongoClient(config['ADDRESS'], maxPoolSize=50, connect=False)
+mongo = pymongo.MongoClient(os.environ['ADDRESS'], maxPoolSize=50, connect=False)
 db = pymongo.database.Database(mongo, 'evandgo')
 survey_col = pymongo.collection.Collection(db, 'survey_results')
 car_col = pymongo.collection.Collection(db, 'electric_vehicles')
