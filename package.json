@@ -4,5 +4,6 @@
     "react-spring": "^9.1.2",
     "react-three-fiber": "^6.0.13",
     "three": "^0.128.0"
-  }
+  },
+  "start" : "cd evapplication && yarn start"
 }
