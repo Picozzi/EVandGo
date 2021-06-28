@@ -39,7 +39,7 @@ const SurveyOne = () => {
     const onCompletePage = useCallback((data)=> {
     const survey_id = uuid();
     const result = Object.assign({}, data, {"survey_id":survey_id});
-    axios.post('http://localhost:5000/post_survey_data', JSON.stringify(result), {'Content-Type': 'application/json'}).then(response => {
+    axios.post('https://evandgo.herokuapp.com/post_survey_data', JSON.stringify(result), {'Content-Type': 'application/json'}).then(response => {
     console.log("SUCCESS", response);
     }).catch(error => {
       console.log(error)

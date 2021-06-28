@@ -21,7 +21,7 @@ import LoadingAnimation from './load.gif';
 const Results = () => {
 
   const [vehicleList, setVehicleList] = useState(null);
-  const base_url = "http://localhost:5000/recommendations/";
+  const base_url = "https://evandgo.herokuapp.com/recommendations/";
   const survey_id = (window.location.href).substr((window.location.href).search("/quiz/results/")+14);
   const api_url = base_url.concat((survey_id).toString());
   useEffect(()=>{

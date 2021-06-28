@@ -3,13 +3,14 @@ from flask import Flask
 from flask import request
 import json
 from bson import ObjectId
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+from flask.helpers import send_from_directory
 import pymongo
 from bson import json_util
 from dotenv import dotenv_values
 
 config = dotenv_values(".env")
-app = Flask(__name__)
+app = Flask(__name__, static_folder="evapplication/build", static_url_path="")
 CORS(app)
 
 mongo = pymongo.MongoClient(config['ADDRESS'], maxPoolSize=50, connect=False)
@@ -24,10 +25,12 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self,o)
 
 @app.route('/time')
+@cross_origin
 def get_current_time():
     return{'time': time.time()}
 
 @app.route('/post_survey_data', methods = ['POST'])
+@cross_origin
 def post_survey_data():
     d = request.get_json(force="False")
     json.dumps(d, cls=JSONEncoder)
@@ -35,6 +38,7 @@ def post_survey_data():
     return 'hi'
 
 @app.route('/recommendations/<surveyid>', methods = ['GET'])
+@cross_origin
 def recommendations(surveyid):
     survey_results = retrieve_survey_results(surveyid)
     recommendations = retrieve_valid_cars(survey_results)
@@ -114,3 +118,11 @@ def retrieve_survey_results(surveyid):
     survey = survey_col.find_one(filter=new_filter)
     survey = json.loads(json_util.dumps(survey))
     return survey
+
+@app.route('/')
+@cross_origin
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+if __name__ == '__main__':
+    app.run()

@@ -18,7 +18,11 @@
     "react-uuid": "^1.0.2",
     "survey-react": "^1.8.50",
     "surveyjs-widgets": "^1.8.50",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "@react-three/drei": "^5.0.0",
+    "react-spring": "^9.1.2",
+    "react-three-fiber": "^6.0.13",
+    "three": "^0.128.0"
   },
   "scripts": {
     "start": "react-scripts start",
