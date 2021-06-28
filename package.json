@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@react-three/drei": "^5.0.0",
+    "react-spring": "^9.1.2",
+    "react-three-fiber": "^6.0.13",
+    "three": "^0.128.0"
+  }
+}

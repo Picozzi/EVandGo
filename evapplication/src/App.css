@@ -1,0 +1,49 @@
+html,
+body,
+:root,
+canvas {
+  background-color: #e9c46a;
+}
+
+.quiz {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: scroll;
+  background-color: #264653;
+  padding-bottom: 2em;
+}
+
+.temp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.buttonb {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
+
+.pedal
+{
+  height: 100%;
+  width: 20%;
+}
+
+.pedal:active{
+  box-shadow: 10px 10px black;
+}
+
+.MuiAppBar-positionFixed {
+  position: relative !important;
+}
