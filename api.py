@@ -30,7 +30,7 @@ def not_found(e):
     return app.send_static_file('index.html')
 
 @app.route('/time')
-@cross_origin
+@cross_origin()
 def get_current_time():
      return{'time': time.time()}
 
