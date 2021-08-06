@@ -26,6 +26,7 @@ Please make sure to update tests as appropriate.
 - React
 - Flask
 - Amazon S3
+- MongoDB
 
 ## License
 
