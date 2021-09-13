@@ -34,6 +34,7 @@ def not_found(e):
 def get_current_time():
     return{'time': time.time()}
 
+# route to post survey data to MongoDB
 @app.route('/post_survey_data', methods = ['POST'])
 @cross_origin()
 def post_survey_data():
@@ -42,6 +43,7 @@ def post_survey_data():
     survey_col.insert_one(d)
     return 'hi'
 
+# data to retrieve survey_data from MongoDB and return unique recommendations for survey
 @app.route('/recommendations/<surveyid>', methods = ['GET'])
 @cross_origin()
 def recommendations(surveyid):
@@ -83,6 +85,7 @@ def retrieve_valid_cars(survey_results):
     for car in car_json:
         car['criteriaMet'] = 0 
 
+    # evaluate whether each car meets criteria
     for car in car_json:
         crtieria_list = [
             ((car['driveTrain']).lower() == (survey_results['drivetrain']).lower()) or survey_results['drivetrain'] == "Any", #drivetrain
@@ -97,15 +100,21 @@ def retrieve_valid_cars(survey_results):
             car['legacyOEM'] == survey_results['legacy_oem'], #legacy oem
             car['buildQuality'] >= survey_results['build_quality'], #build quality
         ]
+        
+        # add criteria score to each car
         for criteria in crtieria_list:
             if criteria:
                 car['criteriaMet'] += 1
 
+
+        # find criteria met percentage
         car['criteriaPercentage'] = int(car['criteriaMet'] / len(crtieria_list) * 100)
 
+        # add all cars that met at least one criteria
         if car['criteriaMet'] >= 0:
             car_recommendations.append(car)
 
+    # sort by number of criteria met
     car_recommendations = sorted(car_recommendations, key=lambda i: ( extract_critera(i), extract_rank(i) ), reverse=True)
 
     #limit to 15 entries
