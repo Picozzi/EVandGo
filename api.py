@@ -48,9 +48,8 @@ def post_survey_data():
 @cross_origin()
 def recommendations(surveyid):
     survey_results = retrieve_survey_results(surveyid)
-    return str(mongo) + str(db) + str(survey_col) + str(car_col)
-    #recommendations = retrieve_valid_cars(survey_results)
-    #return recommendations
+    recommendations = retrieve_valid_cars(survey_results)
+    return recommendations
 
 #helper recommendation functions and dictionaries 
 
@@ -130,11 +129,8 @@ def retrieve_survey_results(surveyid):
     new_filter = {
         "survey_id" : surveyid
     }
-    try:
-        survey = survey_col.find_one(filter=new_filter)
-        survey = json.loads(json_util.dumps(survey))
-    except Exception as e:
-        return str(e)
+    survey = survey_col.find_one(filter=new_filter)
+    survey = json.loads(json_util.dumps(survey))
     return survey
 
 @app.route('/')
