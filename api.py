@@ -48,7 +48,7 @@ def post_survey_data():
 @cross_origin()
 def recommendations(surveyid):
     survey_results = retrieve_survey_results(surveyid)
-    return survey_results
+    return str(mongo)
     #recommendations = retrieve_valid_cars(survey_results)
     #return recommendations
 
