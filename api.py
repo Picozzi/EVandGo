@@ -135,8 +135,13 @@ def retrieve_survey_results(surveyid):
     new_filter = {
         "survey_id" : surveyid
     }
-    survey = survey_col.find_one(filter=new_filter)
-    survey = json.loads(json_util.dumps(survey))
+    
+    try:
+        survey = survey_col.find_one(filter=new_filter)
+        survey = json.loads(json_util.dumps(survey))
+    except Exception as e:
+        return(e)
+        
     return survey
 
 @app.route('/')
