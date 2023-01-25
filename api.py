@@ -14,7 +14,7 @@ from bson import json_util
 app = Flask(__name__, static_folder="evapplication/build", static_url_path="")
 CORS(app)
 
-mongo = pymongo.MongoClient(os.environ['ADDRESS'], maxPoolSize=50, connect=False)
+mongo = pymongo.MongoClient(os.getenv('ADDRESS'), maxPoolSize=50, connect=False)
 db = pymongo.database.Database(mongo, 'evandgo')
 survey_col = pymongo.collection.Collection(db, 'survey_results')
 car_col = pymongo.collection.Collection(db, 'electric_vehicles')
