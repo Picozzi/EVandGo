@@ -47,15 +47,10 @@ def post_survey_data():
 @app.route('/recommendations/<surveyid>', methods = ['GET'])
 @cross_origin()
 def recommendations(surveyid):
-    try:
-        survey_results = retrieve_survey_results(surveyid)
-    except:
-        return 'c1'
-    try:
-        recommendations = retrieve_valid_cars(survey_results)
-    except:
-        return 'c2'
-    return recommendations
+    survey_results = retrieve_survey_results(surveyid)
+    return survey_results
+    #recommendations = retrieve_valid_cars(survey_results)
+    #return recommendations
 
 #helper recommendation functions and dictionaries 
 
@@ -135,13 +130,11 @@ def retrieve_survey_results(surveyid):
     new_filter = {
         "survey_id" : surveyid
     }
-    
     try:
         survey = survey_col.find_one(filter=new_filter)
         survey = json.loads(json_util.dumps(survey))
     except Exception as e:
-        return(e)
-        
+        return str(e)
     return survey
 
 @app.route('/')
