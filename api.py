@@ -47,8 +47,14 @@ def post_survey_data():
 @app.route('/recommendations/<surveyid>', methods = ['GET'])
 @cross_origin()
 def recommendations(surveyid):
-    survey_results = retrieve_survey_results(surveyid)
-    recommendations = retrieve_valid_cars(survey_results)
+    try:
+        survey_results = retrieve_survey_results(surveyid)
+    except:
+        return 'c1'
+    try:
+        recommendations = retrieve_valid_cars(survey_results)
+    except:
+        return 'c2'
     return recommendations
 
 #helper recommendation functions and dictionaries 
