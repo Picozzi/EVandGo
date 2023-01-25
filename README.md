@@ -8,7 +8,7 @@ The motivation behind this application was to create a way to present the resear
 
 ## How to Use
 
-To view the website, please visit the following url - https://evandgo.herokuapp.com
+To view the website, please visit the following url - https://evandgo.onrender.com/
 
 ## Contributing
 
